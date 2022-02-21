@@ -3,8 +3,7 @@ kind: Service
 metadata:
   name: eks-cicd-demo-service
   labels:
-    app: eks-cicd-demo
-  namespace: "$(NAMESPACE_NAME)"
+    app: eks-cicd-demo 
 
 spec:
   type: NodePort 

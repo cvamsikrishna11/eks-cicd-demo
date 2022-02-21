@@ -3,8 +3,7 @@ kind: Deployment
 metadata:
   name: eks-cicd-demo-deployment
   labels:
-    app: eks-cicd-demo
-  namespace: "$(NAMESPACE_NAME)"
+    app: eks-cicd-demo  
 spec:
   replicas: 2
   selector:
@@ -13,8 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        app: eks-cicd-demo
-      namespace: "$(NAMESPACE_NAME)"
+        app: eks-cicd-demo      
     spec:
       containers:
         - name: eks-cicd-demo
