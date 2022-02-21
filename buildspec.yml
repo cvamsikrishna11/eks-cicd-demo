@@ -3,7 +3,7 @@ phases:
   install:
     commands:
       - echo "Install Phase - Nothing to do using latest Amazon Linux Docker Image for CodeBuild which has all AWS Tools - https://github.com/aws/aws-codebuild-docker-images/blob/master/al2/x86_64/standard/3.0/Dockerfile"
-      - docker login -u vamsichunduru -p Vamsi@3130
+      - docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
   pre_build:
       commands:     
         - echo "Pre Build....."  
