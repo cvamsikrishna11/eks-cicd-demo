@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eks-cicd-demo-deployment
+  labels:
+    app: eks-cicd-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: eks-cicd-demo
+  template:
+    metadata:
+      labels:
+        app: eks-cicd-demo
+    spec:
+      containers:
+        - name: eks-cicd-demo
+          # image: CONTAINER_IMAGE
+          image: vamsichunduru/app:v1
+          ports:
+            - containerPort: 80
