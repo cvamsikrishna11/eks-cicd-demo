@@ -4,7 +4,7 @@ metadata:
   name: eks-cicd-demo-deployment
   labels:
     app: eks-cicd-demo
-  namespace: ${NAMESPACE_NAME}
+  namespace: "$(NAMESPACE_NAME)"
 spec:
   replicas: 2
   selector:
@@ -14,7 +14,7 @@ spec:
     metadata:
       labels:
         app: eks-cicd-demo
-      namespace: ${NAMESPACE_NAME}
+      namespace: "$(NAMESPACE_NAME)"
     spec:
       containers:
         - name: eks-cicd-demo
