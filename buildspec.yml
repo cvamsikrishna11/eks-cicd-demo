@@ -31,6 +31,11 @@ phases:
       # Setup kubectl with our EKS Cluster              
       - echo "Update Kube Config"      
       - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME
+
+      # debug
+
+      - ls -la
+
       # Apply changes to our Application using kubectl
       - echo "Apply changes to kube manifests"            
       - kubectl apply -f kube-manifests/
