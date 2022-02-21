@@ -4,6 +4,7 @@ metadata:
   name: eks-cicd-demo-service
   labels:
     app: eks-cicd-demo
+  namespace: ${NAMESPACE_NAME}
 
 spec:
   type: NodePort 
@@ -13,4 +14,4 @@ spec:
     - protocol: TCP
       port: 80 # service port
       targetPort: 80 #container port
-      nodePort: 31233 # nodeport
+      # nodePort: 31233 # nodeport
