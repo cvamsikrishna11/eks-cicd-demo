@@ -19,7 +19,7 @@ phases:
         # - echo "Login in to Amazon ECR..."
         # - $(aws ecr get-login --no-include-email)
         # # Update Kube config Home Directory
-        # - export KUBECONFIG=$HOME/.kube/config
+        - export KUBECONFIG=$HOME/.kube/config
         - echo "pre build"
   build:
     commands:
