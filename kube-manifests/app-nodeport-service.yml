@@ -6,11 +6,11 @@ metadata:
     app: eks-cicd-demo 
 
 spec:
-  type: NodePort 
+  type: LoadBalancer
   selector:
     app: eks-cicd-demo # maps to the pod which have the label as eks-cicd-dem
   ports:
     - protocol: TCP
       port: 80 # service port
       targetPort: 80 #container port
-      # nodePort: 31233 # nodeport
+      

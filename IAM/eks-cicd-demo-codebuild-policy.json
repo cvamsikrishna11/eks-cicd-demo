@@ -4,7 +4,7 @@
         {
             "Effect": "Allow",
             "Resource": [
-                "arn:aws:logs:us-east-1:577572726499:log-group:/aws/codebuild/*"                
+                "arn:aws:logs:us-east-1:REPLACE_AWS_ACCOUNT_ID:log-group:/aws/codebuild/*"                
             ],
             "Action": [
                 "logs:CreateLogGroup",
@@ -35,14 +35,14 @@
                 "codebuild:BatchPutCodeCoverages"
             ],
             "Resource": [
-                "arn:aws:codebuild:us-east-1:577572726499:report-group/*"
+                "arn:aws:codebuild:us-east-1:REPLACE_AWS_ACCOUNT_ID:report-group/*"
             ]
         },
         {
             "Sid": "VisualEditor0",
             "Effect": "Allow",
             "Action": "sts:AssumeRole",
-            "Resource": "arn:aws:iam::577572726499:role/eks-cicd-kubectl-role"
+            "Resource": "arn:aws:iam::REPLACE_AWS_ACCOUNT_ID:role/eks-cicd-kubectl-role"
         },
         {
             "Effect": "Allow",
