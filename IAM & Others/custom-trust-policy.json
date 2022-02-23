@@ -4,7 +4,7 @@
        {
           "Effect":"Allow",
           "Principal":{
-             "AWS":"arn:aws:iam::REPLACE_AWS_ACCOUNT_ID:root"
+             "AWS":"arn:aws:iam::AWS_ACCOUNT_ID:root"
           },
           "Action":"sts:AssumeRole"
        }
