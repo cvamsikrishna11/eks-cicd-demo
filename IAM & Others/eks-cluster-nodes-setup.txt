@@ -36,4 +36,4 @@ eksctl delete nodegroup --cluster=eks-cicd-dev-cluster --name=ng-workers --regio
 eksctl delete cluster eks-cicd-dev-cluster --region=us-east-1
 
 # Create or update the kubeconfig file for cluster if management server lost track of cluster
-aws eks update-kubeconfig --name eks-cicd-dev-cluster --region=us-east-1
+aws eks --region us-east-1 update-kubeconfig --name eks-cicd-dev-cluster
