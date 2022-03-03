@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: eks-cicd-demo
-          image: CONTAINER_IMAGE     
-          # image: vamsichunduru/app:v1.0.0
+          # image: CONTAINER_IMAGE     
+          image: vamsichunduru/app:v1.0.0
           ports:
             - containerPort: 80
