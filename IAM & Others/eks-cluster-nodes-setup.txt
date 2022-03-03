@@ -28,9 +28,17 @@ eksctl create nodegroup --cluster=eks-cicd-dev-cluster \
                         --alb-ingress-access \
                         --node-private-networking
 
+# Clone the git repo
+git clone https://github.com/cvamsikrishna11/eks-cicd-demo.git
+
+# Change the path to repo folder
+cd eks-cicd-demo
+
+# List existing repo content
+ls
+
 # Create or update the kubeconfig file for cluster if management server lost track of cluster
 aws eks --region us-east-1 update-kubeconfig --name eks-cicd-dev-cluster
-
 
 # Apply kubectl manifests
 kubectl apply -f kube-manifests/
@@ -44,6 +52,72 @@ kubectl get service
 # Delete kube-manifests
 kubectl delete -f kube-manifests/
 
+# Delete nodegroup
+eksctl delete nodegroup --cluster=eks-cicd-dev-cluster --name=ng-workers --region=us-east-1 
+
+# Delete the EKS cluster
+eksctl delete cluster eks-cicd-dev-cluster --region=us-east-1
+
+
+# Check the existing git remote address
+git remote -v
+
+# Remove existing git remote
+git remote rm origin
+
+# Change the path to project eks-cicd-demo
+cd eks-cicd-demo/
+
+# change the path to kube-manifests (should execute above command first)
+cd kube-manifests
+
+# edit app-deployment file for making the container_image as env variable
+nano app-deployment.yml
+
+# read app-deployment.yml file
+cat app-deployment.yml
+
+# To move back 
+cd ..
+
+# To check the git status
+git status
+
+# To add all the changed files to git 
+git add .
+
+# Commit change to local git
+git commit -m "modified the container image variable"
+
+# Add a git remote repo
+git remote add origin https://git-codecommit.us-east-1.amazonaws.com/v1/repos/eks-cicd-demo
+
+# Check git remote 
+git remote -v
+
+# Push changes to remote branch
+git push --set-upstream origin master
+
+
+# Verify existing aws-auth configmap for the cluster
+kubectl get configmap aws-auth -o yaml -n kube-system
+
+# To get pods
+kubectl get pods
+
+# To get service
+kubectl get service
+
+# commands to add, commit, push into git
+git add .
+
+git commit -m "deploying a new version of the app"
+
+git push
+
+
+# Delete kube-manifests
+kubectl delete -f kube-manifests/
 
 # Delete nodegroup
 eksctl delete nodegroup --cluster=eks-cicd-dev-cluster --name=ng-workers --region=us-east-1 
