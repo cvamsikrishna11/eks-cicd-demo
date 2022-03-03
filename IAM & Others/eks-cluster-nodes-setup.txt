@@ -1,11 +1,32 @@
 # To create the EKS cluster without nodegroup
-eksctl create cluster --name=eks-cicd-dev-cluster --region=us-east-1 --zones=us-east-1a,us-east-1b --without-nodegroup
+eksctl create cluster --name=eks-cicd-dev-cluster \
+                      --region=us-east-1 \
+                      --zones=us-east-1a,us-east-1b \
+                      --without-nodegroup
 
 # Create & associate OIDC identity provider, this enables the flexibility to add IAM roles to EKS cluster
-eksctl utils associate-iam-oidc-provider --region us-east-1 --cluster eks-cicd-dev-cluster --approve
+eksctl utils associate-iam-oidc-provider \
+    --region us-east-1 \
+    --cluster eks-cicd-dev-cluster \
+    --approve
 
 # To create the nodegroup in the above created cluster
-eksctl create nodegroup --cluster=eks-cicd-dev-cluster --region=us-east-1 --name=ng-workers --node-type=t2.medium --nodes=2 --nodes-min=2 --nodes-max=4 --node-volume-size=10 --ssh-access --ssh-public-key=kube-demo --managed --asg-access --external-dns-access --full-ecr-access --appmesh-access --alb-ingress-access --node-private-networking
+eksctl create nodegroup --cluster=eks-cicd-dev-cluster \
+                        --region=us-east-1 \
+                        --name=ng-workers \
+                        --node-type=t2.medium \
+                        --nodes-min=2 \
+                        --nodes-max=3 \
+                        --node-volume-size=10 \
+                        --ssh-access \
+                        --ssh-public-key=kube-demo \
+                        --managed \
+                        --asg-access \
+                        --external-dns-access \
+                        --full-ecr-access \
+                        --appmesh-access \
+                        --alb-ingress-access \
+                        --node-private-networking
 
 
 # Delete nodegroup
@@ -14,5 +35,5 @@ eksctl delete nodegroup --cluster=eks-cicd-dev-cluster --name=ng-workers --regio
 # Delete the EKS cluster
 eksctl delete cluster eks-cicd-dev-cluster --region=us-east-1
 
-# Create or update the kubeconfig file for cluster
+# Create or update the kubeconfig file for cluster if management server lost track of cluster
 aws eks update-kubeconfig --name eks-cicd-dev-cluster --region=us-east-1
