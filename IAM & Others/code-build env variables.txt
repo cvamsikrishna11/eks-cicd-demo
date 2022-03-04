@@ -1,0 +1,8 @@
+## Be careful with spaces while copying
+# Replace AWS account with your own account id
+EKS_KUBECTL_ROLE_ARN - arn:aws:iam::464599248654:role/eks-cicd-kubectl-role
+
+EKS_CLUSTER_NAME - eks-cicd-dev-cluster
+
+# Replace AWS account with your own account id
+REPOSITORY_URI - 464599248654.dkr.ecr.us-east-1.amazonaws.com/eks-cicd-demo
