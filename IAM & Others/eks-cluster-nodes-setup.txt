@@ -90,7 +90,7 @@ git add .
 git commit -m "modified the container image variable"
 
 # Add a git remote repo
-git remote add origin https://git-codecommit.us-east-1.amazonaws.com/v1/repos/eks-cicd-demo
+git remote add origin https://git-codecommit.eu-west-2.amazonaws.com/v1/repos/eks-cicd-demo
 
 # Check git remote 
 git remote -v
