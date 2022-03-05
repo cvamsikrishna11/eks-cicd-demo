@@ -1,18 +1,20 @@
 # To create the EKS cluster without nodegroup
 eksctl create cluster --name=eks-cicd-dev-cluster \
-                      --region=us-east-1 \
-                      --zones=us-east-1a,us-east-1b \
+                      --region=eu-west-2 \
+                      --zones=eu-west-2a,eu-west-2b \
                       --without-nodegroup
 
 # Create & associate OIDC identity provider, this enables the flexibility to add IAM roles to EKS cluster
+# load-balancer interaction (check)
+
 eksctl utils associate-iam-oidc-provider \
-    --region us-east-1 \
+    --region eu-west-2 \
     --cluster eks-cicd-dev-cluster \
     --approve
 
 # To create the nodegroup in the above created cluster
 eksctl create nodegroup --cluster=eks-cicd-dev-cluster \
-                        --region=us-east-1 \
+                        --region=eu-west-2 \
                         --name=ng-workers \
                         --node-type=t2.medium \
                         --nodes-min=2 \
@@ -38,7 +40,7 @@ cd eks-cicd-demo
 ls
 
 # Create or update the kubeconfig file for cluster if management server lost track of cluster
-aws eks --region us-east-1 update-kubeconfig --name eks-cicd-dev-cluster
+aws eks --region eu-west-2 update-kubeconfig --name eks-cicd-dev-cluster
 
 # Apply kubectl manifests
 kubectl apply -f kube-manifests/
@@ -53,10 +55,10 @@ kubectl get service
 kubectl delete -f kube-manifests/
 
 # Delete nodegroup
-eksctl delete nodegroup --cluster=eks-cicd-dev-cluster --name=ng-workers --region=us-east-1 
+eksctl delete nodegroup --cluster=eks-cicd-dev-cluster --name=ng-workers --region=eu-west-2 
 
 # Delete the EKS cluster
-eksctl delete cluster eks-cicd-dev-cluster --region=us-east-1
+eksctl delete cluster eks-cicd-dev-cluster --region=eu-west-2
 
 
 # Check the existing git remote address
@@ -120,7 +122,7 @@ git push
 kubectl delete -f kube-manifests/
 
 # Delete nodegroup
-eksctl delete nodegroup --cluster=eks-cicd-dev-cluster --name=ng-workers --region=us-east-1 
+eksctl delete nodegroup --cluster=eks-cicd-dev-cluster --name=ng-workers --region=eu-west-2 
 
 # Delete the EKS cluster
-eksctl delete cluster eks-cicd-dev-cluster --region=us-east-1
+eksctl delete cluster eks-cicd-dev-cluster --region=eu-west-2
