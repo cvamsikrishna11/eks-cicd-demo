@@ -48,6 +48,8 @@ phases:
       - echo "Completed applying changes to Kubernetes Objects"           
       # Create Artifacts which we can use if we want to continue our pipeline for other stages
       - printf '[{"name":"app-deployment.yml","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > build.json
+      # Export image uri to the variable so that the same can be forwarded to the prod stage
+      - export IMAGE_URI=$REPOSITORY_URI:$TAG
              
 artifacts:
   files: 
