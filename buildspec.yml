@@ -53,3 +53,8 @@ artifacts:
   files: 
     - build.json   
     - kube-manifests/*
+    
+env:
+  exported-variables:
+    - CODEBUILD_BUILD_ID
+    - IMAGE_URI
