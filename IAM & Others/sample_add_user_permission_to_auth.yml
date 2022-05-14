@@ -1,5 +1,5 @@
 # When the individual IAM user doesnt have the EKS cluster access adding the auth config should help
-# Replace ACCOUNT_ID & User name
+# Replace ACCOUNT_ID & USER_NAME
 
 apiVersion: v1
 data:
@@ -10,8 +10,8 @@ data:
       rolearn: arn:aws:iam::ACCOUNT_ID:role/eksctl-eks-cicd-dev-cluster-nodeg-NodeInstanceRole-4LR6C6R64KMH
       username: system:node:{{EC2PrivateDNSName}}
   mapUsers: |
-    - userarn: arn:aws:iam::ACCOUNT_ID:user/joyoushire_vamsi
-      username: joyoushire_vamsi
+    - userarn: arn:aws:iam::ACCOUNT_ID:user/USER_NAME
+      username: USER_NAME
       groups:
         - system:masters
 kind: ConfigMap
