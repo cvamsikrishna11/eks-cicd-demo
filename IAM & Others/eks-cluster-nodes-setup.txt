@@ -40,6 +40,12 @@ kubectl -n kube-system edit configmap aws-auth
 # Sample file to update the auth config map
 https://github.com/cvamsikrishna11/eks-cicd-demo/blob/master/IAM%20%26%20Others/sample_add_user_permission_to_auth.yml
 
+# Close the file once the autconfig map is modified
+press --> Esc 
+press --> :
+press --> wq!
+press --> Enter
+
 # Clone the git repo
 git clone https://github.com/cvamsikrishna11/eks-cicd-demo.git
 
