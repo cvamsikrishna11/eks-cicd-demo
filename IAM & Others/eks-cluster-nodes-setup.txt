@@ -28,6 +28,18 @@ eksctl create nodegroup --cluster=eks-cicd-dev-cluster \
                         --alb-ingress-access \
                         --node-private-networking
 
+###### Display the EKS cluster to our user ######
+
+# Verify what is present in aws-auth configmap before change
+kubectl get configmap aws-auth -o yaml -n kube-system
+
+# Edit the auth config map
+kubectl -n kube-system edit configmap aws-auth
+
+
+# Sample file to update the auth config map
+"./sample_add_user_permission_to_auth.yml"
+
 # Clone the git repo
 git clone https://github.com/cvamsikrishna11/eks-cicd-demo.git
 
@@ -131,69 +143,8 @@ eksctl delete cluster eks-cicd-dev-cluster --region=us-east-1
 # login as root
 sudo su -
 
-# if you dont have the git in the new machine then try to clone it again
-git clone https://git-codecommit.us-east-1.amazonaws.com/v1/repos/eks-cicd-demo
-
-# list the exiting folders
-ls
-
-# change to eks-cicd-demo
-cd eks-cicd demo
-
-# to edit the buildspec.yml
-nano buildspec.yml
-
-# code to export the env variables
-env:
-  exported-variables:
-    - CODEBUILD_BUILD_ID
-    - IMAGE_URI
-
-# to close the editor
-Press ctrl/cmd + x
-Press y to save the changes
-Press Enter to save the file
-
-# Check the local changes commit to local and central repo
-git status
-git add .
-git commit "added env variables to buildspec"
-git push
-
-# To change folder to the root
-cd /root/
-
-
-# To create temp folder
-mkdir temp
-
-# List files in root
-ls
-
-# Get into temp directory from root (you should be in root folder before executing)
-cd temp
-
-# Clone base repo in the temp folder (You should be in temp folder before executing)
-git clone https://github.com/cvamsikrishna11/eks-cicd-demo.git
-
-# list files in the temp folder
-ls
-
-# change to eks-cicd-demo folder in the temp
-cd eks-cicd-demo
-
-# Copy the prod-buildspec.yml to the codecommit eks-cicd-demo folder (You should be in /root/temp/eks-cicd-demo folder)
-cp prod-buildspec.yml /root/eks-cicd-demo/
-
-# to change back to the codecommit eks-cicd-demo and list files
-cd /root/eks-cicd-demo
-ls
-
-# To push prod-buildspec.yml to the repo ( Enter codecommit credentials when prompted for git push)
-git add .
-git commit -m "added prod-buildspec.yml"
-git push
-
+# access ec2-user folder
+cd /home/ec2-user
 
 # To create the EKS cluster without nodegroup for prod
 eksctl create cluster --name=eks-cicd-prod-cluster \

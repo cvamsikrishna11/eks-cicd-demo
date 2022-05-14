@@ -1,0 +1,25 @@
+# When the individual IAM user doesnt have the EKS cluster access adding the auth config should help
+# Replace ACCOUNT_ID & User name
+
+apiVersion: v1
+data:
+  mapRoles: |
+    - groups:
+      - system:bootstrappers
+      - system:nodes
+      rolearn: arn:aws:iam::ACCOUNT_ID:role/eksctl-eks-cicd-dev-cluster-nodeg-NodeInstanceRole-4LR6C6R64KMH
+      username: system:node:{{EC2PrivateDNSName}}
+  mapUsers: |
+    - userarn: arn:aws:iam::ACCOUNT_ID:user/joyoushire_vamsi
+      username: joyoushire_vamsi
+      groups:
+        - system:masters
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2022-05-14T09:33:50Z"
+  name: aws-auth
+  namespace: kube-system
+  resourceVersion: "2054"
+  uid: a5bb1ba6-011d-452f-8c99-e1668e1d603a
+
+
