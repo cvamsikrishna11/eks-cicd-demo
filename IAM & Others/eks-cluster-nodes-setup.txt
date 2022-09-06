@@ -46,8 +46,14 @@ press --> :
 press --> wq!
 press --> Enter
 
-# Clone the git repo
-git clone https://github.com/cvamsikrishna11/eks-cicd-demo.git
+#change path to the ec2-user
+cd /home/ec2-user
+
+# Download the codebase from the s3 
+aws s3 cp s3://jjtech-config-files/eks-cicd-demo.zip .
+
+# Unzip the downloaded code zip
+unzip eks-cicd-demo.zip 
 
 # Change the path to repo folder
 cd eks-cicd-demo
@@ -77,14 +83,8 @@ eksctl delete nodegroup --cluster=eks-cicd-dev-cluster --name=ng-workers --regio
 eksctl delete cluster eks-cicd-dev-cluster --region=us-east-1
 
 
-# Check the existing git remote address
-git remote -v
-
-# Remove existing git remote
-git remote rm origin
-
 # Change the path to project eks-cicd-demo
-cd eks-cicd-demo/
+cd /home/ec2-user/eks-cicd-demo/
 
 # change the path to kube-manifests (should execute above command first)
 cd kube-manifests
@@ -97,6 +97,9 @@ cat app-deployment.yml
 
 # To move back 
 cd ..
+
+# To initialize the git repo
+git init
 
 # To check the git status
 git status
@@ -133,6 +136,8 @@ git commit -m "deploying a new version of the app"
 
 git push
 
+# Be in the folder /home/ec2-user/eks-cicd-demo
+cd /home/ec2-user/eks-cicd-demo
 
 # Delete kube-manifests
 kubectl delete -f kube-manifests/
@@ -211,8 +216,8 @@ git push
 
 ################## To delete the infra ##################
 
-# Be in the folder /root/eks-cicd-demo
-cd /root/eks-cicd-demo
+# Be in the folder /home/ec2-user/eks-cicd-demo
+cd /home/ec2-user/eks-cicd-demo
 
 1. Prod cluster deletion
 # setup prod cluster in kubeconfig
